@@ -69,14 +69,16 @@
 
         .pointer {
             position: absolute;
-            top: -10px;
+            top: -5px;
             left: 50%;
             transform: translateX(-50%);
-            width: 30px;
-            height: 30px;
-            background: #e31837;
-            clip-path: polygon(50% 100%, 0 0, 100% 0);
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 25px solid #e31837;
             z-index: 10;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));
         }
 
         .spin-btn {
@@ -230,14 +232,14 @@
 
     <script>
         const prizes = [
-            { text: 'iPhone 15\nPro Max', color: '#e74c3c' },
-            { text: '5000\nDirhams', color: '#f39c12' },
+            { text: 'iPhone 15 Pro Max', color: '#e74c3c' },
+            { text: '5000 Dirhams', color: '#f39c12' },
             { text: 'Rejouer', color: '#3498db' },
-            { text: 'Google Play\n100$', color: '#2ecc71' },
+            { text: 'Google Play 100$', color: '#2ecc71' },
             { text: 'Rien', color: '#95a5a6' },
-            { text: 'Petit\nCadeau', color: '#9b59b6' },
+            { text: 'Petit Cadeau', color: '#9b59b6' },
             { text: 'Rejouer', color: '#1abc9c' },
-            { text: 'iPhone 15\nPro Max', color: '#e67e22' }
+            { text: 'iPhone 15 Pro Max', color: '#e67e22' }
         ];
 
         let spinsLeft = 3;
@@ -258,7 +260,7 @@
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             prizes.forEach((prize, index) => {
-                const startAngle = (index * anglePerSegment) + rotation;
+                const startAngle = index * anglePerSegment + rotation;
                 const endAngle = startAngle + anglePerSegment;
                 
                 // Draw segment
@@ -279,12 +281,7 @@
                 ctx.textAlign = 'center';
                 ctx.fillStyle = 'white';
                 ctx.font = 'bold 16px Arial';
-                
-                const lines = prize.text.split('\n');
-                lines.forEach((line, i) => {
-                    ctx.fillText(line, radius * 0.6, (i - (lines.length - 1) / 2) * 20);
-                });
-                
+                ctx.fillText(prize.text, radius * 0.6, 6);
                 ctx.restore();
             });
             
@@ -296,6 +293,35 @@
             ctx.strokeStyle = '#333';
             ctx.lineWidth = 3;
             ctx.stroke();
+        }
+
+        function getWinningIndex(rotation) {
+            const segments = prizes.length;
+            const anglePerSegment = (2 * Math.PI) / segments;
+            
+            // Pointer is at top (270 degrees or -90 degrees in standard position)
+            const pointerAngle = (3 * Math.PI) / 2; // 270 degrees
+            
+            // Normalize rotation
+            const normalizedRotation = ((rotation % (2 * Math.PI)) + (2 * Math.PI)) % (2 * Math.PI);
+            
+            // Find which segment is under the pointer
+            for (let i = 0; i < segments; i++) {
+                const segmentStart = i * anglePerSegment;
+                const segmentEnd = (i + 1) * anglePerSegment;
+                
+                // Check if pointer angle falls in this segment
+                let checkAngle = pointerAngle;
+                
+                // Adjust for rotation
+                let adjustedAngle = (checkAngle - normalizedRotation + (2 * Math.PI)) % (2 * Math.PI);
+                
+                if (adjustedAngle >= segmentStart && adjustedAngle < segmentEnd) {
+                    return i;
+                }
+            }
+            
+            return 0;
         }
 
         function spin() {
@@ -311,7 +337,7 @@
             resultBox.style.display = 'none';
             document.getElementById('shareSection').style.display = 'none';
 
-            // Determine winning index
+            // First, randomly choose the winning prize
             let winningIndex;
             
             if (firstSpin) {
@@ -322,22 +348,32 @@
                 winningIndex = Math.floor(Math.random() * prizes.length);
             }
 
-            // Calculate target angle
-            const anglePerSegment = (2 * Math.PI) / prizes.length;
-            const targetAngle = (2 * Math.PI) - (winningIndex * anglePerSegment) - (anglePerSegment / 2);
+            // Calculate exact angle to land on winning segment
+            const segments = prizes.length;
+            const anglePerSegment = (2 * Math.PI) / segments;
+            
+            // Pointer is at top (270 degrees)
+            const pointerAngle = (3 * Math.PI) / 2;
+            
+            // Calculate target rotation so winning segment is at pointer
+            const targetSegmentCenter = winningIndex * anglePerSegment + anglePerSegment / 2;
+            const targetRotation = (pointerAngle - targetSegmentCenter + (2 * Math.PI)) % (2 * Math.PI);
+            
+            // Add full spins (5 complete rotations)
             const fullSpins = 5 * (2 * Math.PI);
-            const totalRotation = fullSpins + targetAngle - currentAngle;
+            const totalRotation = fullSpins + targetRotation;
             
             const startTime = performance.now();
             const duration = 4000;
+            const startAngle = currentAngle;
 
             function animate(now) {
                 const elapsed = now - startTime;
                 const progress = Math.min(elapsed / duration, 1);
                 
-                // Easing function
+                // Easing function for smooth deceleration
                 const eased = 1 - Math.pow(1 - progress, 3);
-                const angle = currentAngle + (totalRotation * eased);
+                const angle = startAngle + (totalRotation * eased);
                 
                 drawWheel(angle);
                 
@@ -346,8 +382,11 @@
                 } else {
                     currentAngle = angle % (2 * Math.PI);
                     
-                    const prize = prizes[winningIndex];
-                    wonPrize = prize.text.replace('\n', ' ');
+                    // Verify winning index
+                    const verifiedIndex = getWinningIndex(currentAngle);
+                    const prize = prizes[verifiedIndex];
+                    
+                    wonPrize = prize.text;
                     
                     spinsLeft--;
                     document.getElementById('spinsLeft').textContent = `Tours restants: ${spinsLeft}`;
