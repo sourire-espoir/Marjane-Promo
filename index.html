@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marjane - Spécial Ramadan Promo</title>
+    <title>Marjane - Promotion Spéciale Ramadan</title>
     <style>
         * {
             margin: 0;
@@ -12,406 +12,442 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
+            min-height: 100vh;
+            padding: 20px;
         }
 
         .container {
             background: white;
-            border-radius: 20px;
-            padding: 30px;
-            max-width: 600px;
-            width: 90%;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            text-align: center;
-            position: relative;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
 
         .header {
-            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            background: #e31837;
             color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 30px;
+            padding: 25px 20px;
+            text-align: center;
         }
 
         .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 28px;
+            font-weight: bold;
+            letter-spacing: 1px;
         }
 
         .header p {
-            font-size: 1.2em;
-            animation: pulse 1.5s infinite;
+            margin-top: 8px;
+            font-size: 15px;
+            opacity: 0.95;
         }
 
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
+        .wheel-section {
+            padding: 30px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .wheel-container {
+        .wheel-wrapper {
             position: relative;
-            width: 300px;
-            height: 300px;
-            margin: 30px auto;
+            width: 280px;
+            height: 280px;
+            margin-bottom: 30px;
         }
 
         .wheel {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            border: 10px solid #f39c12;
+            border: 8px solid #333;
             position: relative;
-            transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
-            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+            transition: transform 4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            background: conic-gradient(
+                #e74c3c 0deg 45deg,
+                #f39c12 45deg 90deg,
+                #3498db 90deg 135deg,
+                #2ecc71 135deg 180deg,
+                #9b59b6 180deg 225deg,
+                #e67e22 225deg 270deg,
+                #1abc9c 270deg 315deg,
+                #e74c3c 315deg 360deg
+            );
         }
 
-        .wheel-segment {
+        .segment {
             position: absolute;
             width: 50%;
             height: 50%;
-            transform-origin: 100% 100%;
+            top: 50%;
+            left: 50%;
+            transform-origin: 0% 0%;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 11px;
             font-weight: bold;
             color: white;
-            font-size: 11px;
             text-align: center;
-            padding: 10px;
-            clip-path: polygon(0 0, 100% 0, 0 100%);
+            padding: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
         }
 
         .pointer {
             position: absolute;
-            top: -20px;
+            top: -15px;
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-top: 40px solid #e74c3c;
+            border-left: 18px solid transparent;
+            border-right: 18px solid transparent;
+            border-top: 30px solid #e31837;
             z-index: 10;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .center-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            border: 4px solid #333;
+            z-index: 5;
         }
 
         .spin-btn {
-            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            background: #e31837;
             color: white;
             border: none;
-            padding: 15px 40px;
-            font-size: 1.3em;
+            padding: 15px 50px;
+            font-size: 18px;
+            font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
-            margin: 20px 0;
             transition: all 0.3s;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(227, 24, 55, 0.3);
         }
 
-        .spin-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        .spin-btn:active {
+            transform: scale(0.95);
         }
 
         .spin-btn:disabled {
-            background: #95a5a6;
+            background: #ccc;
             cursor: not-allowed;
-            transform: none;
+            box-shadow: none;
         }
 
-        .result {
-            font-size: 1.5em;
-            color: #2c3e50;
-            margin: 20px 0;
-            padding: 20px;
-            border-radius: 10px;
-            background: #ecf0f1;
+        .spins-info {
+            margin-top: 15px;
+            color: #666;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .result-box {
             display: none;
+            margin: 20px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #e31837;
+        }
+
+        .result-box h2 {
+            color: #e31837;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .result-box p {
+            font-size: 18px;
+            color: #333;
+            font-weight: bold;
         }
 
         .share-section {
             display: none;
-            margin-top: 20px;
+            margin: 20px;
             padding: 20px;
-            background: #f8f9fa;
+            background: #fff8e1;
             border-radius: 10px;
+            border: 2px solid #f39c12;
+            text-align: center;
         }
 
-        .whatsapp-btn {
+        .share-section h3 {
+            color: #e31837;
+            margin-bottom: 15px;
+        }
+
+        .share-btn {
             background: #25D366;
             color: white;
             border: none;
             padding: 12px 30px;
-            font-size: 1.1em;
+            font-size: 16px;
+            font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
-            margin: 10px;
-            font-weight: bold;
-        }
-
-        .whatsapp-btn:hover {
-            background: #128C7E;
+            margin-top: 10px;
         }
 
         .comments-section {
-            margin-top: 30px;
-            background: #f8f9fa;
-            border-radius: 10px;
             padding: 20px;
-            max-height: 400px;
-            overflow-y: auto;
+            background: #fafafa;
+            border-top: 1px solid #eee;
+        }
+
+        .comments-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+            text-align: center;
         }
 
         .comment {
             background: white;
             padding: 15px;
-            margin: 10px 0;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            text-align: left;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
         }
 
-        .comment .name {
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .comment-name {
             font-weight: bold;
-            color: #2c3e50;
+            color: #333;
+            font-size: 14px;
         }
 
-        .comment .time {
-            font-size: 0.8em;
-            color: #7f8c8d;
+        .comment-time {
+            color: #999;
+            font-size: 12px;
         }
 
-        .verified {
+        .comment-text {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .verified-badge {
             color: #25D366;
-            font-size: 0.9em;
-        }
-
-        .rolling-message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.9);
-            color: white;
-            padding: 30px;
-            border-radius: 20px;
-            z-index: 1000;
-            display: none;
-            text-align: center;
-            animation: bounceIn 0.5s;
-        }
-
-        @keyframes bounceIn {
-            0% { transform: translate(-50%, -50%) scale(0); }
-            50% { transform: translate(-50%, -50%) scale(1.1); }
-            100% { transform: translate(-50%, -50%) scale(1); }
-        }
-
-        .remaining-spins {
-            margin: 10px 0;
-            font-weight: bold;
-            color: #e74c3c;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎉 MARJANE 🎉</h1>
-            <p>🌟 Spécial Ramadan - Promo Exceptionnelle 🌟</p>
-            <p>🎁 Tentez votre chance maintenant! 🎁</p>
+            <h1>MARJANE</h1>
+            <p>🎉 Promotion Spéciale Ramadan 🎉</p>
+            <p style="font-size: 13px; margin-top: 5px;">Tentez votre chance et gagnez des cadeaux incroyables!</p>
         </div>
 
-        <div class="wheel-container">
-            <div class="pointer"></div>
-            <div class="wheel" id="wheel">
-                <!-- Segments will be added by JavaScript -->
+        <div class="wheel-section">
+            <div class="wheel-wrapper">
+                <div class="pointer"></div>
+                <div class="wheel" id="wheel"></div>
+                <div class="center-circle"></div>
             </div>
+            
+            <button class="spin-btn" id="spinBtn" onclick="spin()">🎰 TOURNER LA ROUE</button>
+            <div class="spins-info" id="spinsInfo">Tours restants: 3</div>
         </div>
 
-        <div class="remaining-spins" id="remaining-spins">🎯 Tours restants: 3</div>
+        <div class="result-box" id="resultBox">
+            <h2>Résultat</h2>
+            <p id="resultText"></p>
+        </div>
 
-        <button class="spin-btn" id="spin-btn" onclick="spinWheel()">🎰 TOURNER LA ROUE 🎰</button>
-
-        <div class="result" id="result"></div>
-
-        <div class="share-section" id="share-section">
+        <div class="share-section" id="shareSection">
             <h3>🎊 Félicitations! 🎊</h3>
-            <p>Pour recevoir votre prix, partagez avec:</p>
-            <p><strong>📱 5 contacts WhatsApp</strong></p>
-            <p><strong>👥 2 groupes WhatsApp</strong></p>
-            <button class="whatsapp-btn" onclick="shareToWhatsApp()">
-                📤 Partager sur WhatsApp
-            </button>
+            <p style="margin-bottom: 10px;">Pour recevoir votre prix, partagez avec:</p>
+            <p>📱 <strong>5 contacts WhatsApp</strong></p>
+            <p style="margin-bottom: 15px;">👥 <strong>2 groupes WhatsApp</strong></p>
+            <button class="share-btn" onclick="shareWhatsApp()">📤 Partager sur WhatsApp</button>
         </div>
 
         <div class="comments-section">
-            <h3>💬 Commentaires des gagnants 💬</h3>
-            <div id="comments"></div>
+            <h3>💬 Gagnants Récents</h3>
+            <div id="commentsContainer"></div>
         </div>
     </div>
 
-    <div class="rolling-message" id="rolling-message"></div>
-
     <script>
-        let spinsRemaining = 3;
-        let hasWon = false;
-        let currentPrize = '';
-
         const prizes = [
-            { text: '📱 iPhone 15 Pro Max', color: '#e74c3c', weight: 5 },
-            { text: '💶 5000 Dirhams', color: '#f39c12', weight: 5 },
-            { text: '🎰 Rejouer', color: '#3498db', weight: 20 },
-            { text: '🎮 Google Play 100$', color: '#2ecc71', weight: 5 },
-            { text: '😅 Rien du tout', color: '#95a5a6', weight: 5 },
-            { text: '🎁 Petit cadeau', color: '#9b59b6', weight: 20 },
-            { text: '🎰 Rejouer', color: '#1abc9c', weight: 20 },
-            { text: '📱 iPhone 15 Pro Max', color: '#e67e22', weight: 5 }
+            { text: 'iPhone 15 Pro Max', color: '#e74c3c' },
+            { text: '5000 Dirhams', color: '#f39c12' },
+            { text: 'Rejouer', color: '#3498db' },
+            { text: 'Google Play 100$', color: '#2ecc71' },
+            { text: 'Rien', color: '#95a5a6' },
+            { text: 'Petit Cadeau', color: '#9b59b6' },
+            { text: 'Rejouer', color: '#1abc9c' },
+            { text: 'iPhone 15 Pro Max', color: '#e67e22' }
         ];
 
-        // Force win for first spin
-        let forceWin = true;
+        let currentRotation = 0;
+        let spinsLeft = 3;
+        let wonPrize = null;
+        let firstSpin = true;
 
         function createWheel() {
             const wheel = document.getElementById('wheel');
-            const segmentAngle = 360 / prizes.length;
-            
+            const segments = prizes.length;
+            const anglePerSegment = 360 / segments;
+
             prizes.forEach((prize, index) => {
                 const segment = document.createElement('div');
-                segment.className = 'wheel-segment';
-                segment.style.backgroundColor = prize.color;
-                segment.style.transform = `rotate(${index * segmentAngle}deg)`;
-                segment.style.transformOrigin = '100% 100%';
-                segment.innerHTML = `<span style="transform: rotate(${index * segmentAngle + segmentAngle/2}deg); display: block; transform-origin: center;">${prize.text}</span>`;
+                segment.className = 'segment';
+                
+                // Position each segment
+                const rotation = index * anglePerSegment;
+                segment.style.transform = `rotate(${rotation}deg)`;
+                segment.style.background = prize.color;
+                
+                // Add text
+                const textSpan = document.createElement('span');
+                textSpan.textContent = prize.text;
+                textSpan.style.transform = `rotate(${anglePerSegment / 2}deg)`;
+                textSpan.style.display = 'block';
+                textSpan.style.width = '60px';
+                textSpan.style.textAlign = 'center';
+                textSpan.style.fontSize = '10px';
+                
+                segment.appendChild(textSpan);
                 wheel.appendChild(segment);
             });
         }
 
-        function spinWheel() {
-            if (spinsRemaining <= 0) {
-                alert('❌ Vous avez épuisé tous vos tours!');
+        function spin() {
+            if (spinsLeft <= 0) {
+                alert('Vous avez utilisé tous vos tours!');
                 return;
             }
 
+            const button = document.getElementById('spinBtn');
             const wheel = document.getElementById('wheel');
-            const spinBtn = document.getElementById('spin-btn');
-            const result = document.getElementById('result');
+            const resultBox = document.getElementById('resultBox');
             
-            spinBtn.disabled = true;
-            result.style.display = 'none';
-            
+            button.disabled = true;
+            resultBox.style.display = 'none';
+            document.getElementById('shareSection').style.display = 'none';
+
+            // Determine winning index
             let winningIndex;
             
-            if (forceWin || Math.random() < 0.7) {
-                // Win something good (not "Rien du tout" or "Rejouer")
-                const goodPrizes = prizes.map((p, i) => ({...p, index: i}))
-                    .filter(p => !p.text.includes('Rien') && !p.text.includes('Rejouer'));
-                const randomGood = goodPrizes[Math.floor(Math.random() * goodPrizes.length)];
-                winningIndex = randomGood.index;
-                forceWin = false;
+            if (firstSpin) {
+                // First spin always wins something good
+                const goodIndexes = [0, 1, 3, 5, 7]; // iPhone, 5000dh, Google Play, Petit Cadeau, iPhone
+                winningIndex = goodIndexes[Math.floor(Math.random() * goodIndexes.length)];
+                firstSpin = false;
             } else {
+                // Random for subsequent spins
                 winningIndex = Math.floor(Math.random() * prizes.length);
             }
+
+            // Calculate rotation to land on winning segment
+            const anglePerSegment = 360 / prizes.length;
+            const targetAngle = 360 - (winningIndex * anglePerSegment + anglePerSegment / 2);
+            const fullSpins = 5; // Always do 5 full spins
+            const newRotation = currentRotation + (fullSpins * 360) + targetAngle - (currentRotation % 360);
             
-            const segmentAngle = 360 / prizes.length;
-            const targetAngle = 360 - (winningIndex * segmentAngle + segmentAngle / 2);
-            const fullSpins = 5 + Math.floor(Math.random() * 5);
-            const totalRotation = fullSpins * 360 + targetAngle;
-            
-            wheel.style.transform = `rotate(${totalRotation}deg)`;
-            
-            spinsRemaining--;
-            document.getElementById('remaining-spins').textContent = `🎯 Tours restants: ${spinsRemaining}`;
-            
+            wheel.style.transform = `rotate(${newRotation}deg)`;
+            currentRotation = newRotation;
+
+            spinsLeft--;
+            document.getElementById('spinsInfo').textContent = `Tours restants: ${spinsLeft}`;
+
             setTimeout(() => {
-                currentPrize = prizes[winningIndex].text;
+                const prize = prizes[winningIndex];
+                wonPrize = prize.text;
                 
-                if (currentPrize.includes('Rien')) {
-                    result.innerHTML = '😅 Malheureusement, vous avez gagné rien cette fois! Essayez encore!';
-                    result.style.display = 'block';
-                    spinBtn.disabled = false;
-                } else if (currentPrize.includes('Rejouer')) {
-                    result.innerHTML = '🎰 Vous avez gagné un tour supplémentaire! Rejouez!';
-                    result.style.display = 'block';
-                    spinsRemaining++;
-                    document.getElementById('remaining-spins').textContent = `🎯 Tours restants: ${spinsRemaining}`;
-                    spinBtn.disabled = false;
+                if (prize.text === 'Rien') {
+                    document.getElementById('resultText').textContent = '😅 Malheureusement, vous avez gagné rien. Réessayez!';
+                    resultBox.style.display = 'block';
+                    button.disabled = false;
+                } else if (prize.text === 'Rejouer') {
+                    document.getElementById('resultText').textContent = '🎰 Vous avez gagné un tour supplémentaire!';
+                    resultBox.style.display = 'block';
+                    spinsLeft++;
+                    document.getElementById('spinsInfo').textContent = `Tours restants: ${spinsLeft}`;
+                    button.disabled = false;
                 } else {
-                    hasWon = true;
-                    result.innerHTML = `🎉 FÉLICITATIONS! Vous avez gagné: ${currentPrize} 🎉`;
-                    result.style.display = 'block';
-                    document.getElementById('share-section').style.display = 'block';
-                    spinBtn.disabled = true;
-                    
-                    // Show rolling message
-                    showRollingMessage(`🎉 BRAVO! Vous avez gagné ${currentPrize}! 🎉`);
+                    document.getElementById('resultText').textContent = `🎉 ${prize.text}!`;
+                    resultBox.style.display = 'block';
+                    document.getElementById('shareSection').style.display = 'block';
+                    button.disabled = true;
                 }
             }, 4000);
         }
 
-        function showRollingMessage(message) {
-            const rollingMsg = document.getElementById('rolling-message');
-            rollingMsg.innerHTML = `<h2>${message}</h2>`;
-            rollingMsg.style.display = 'block';
-            
-            setTimeout(() => {
-                rollingMsg.style.display = 'none';
-            }, 3000);
-        }
-
-        function shareToWhatsApp() {
-            const shareText = `🎉🎊 J'AI GAGNÉ ${currentPrize} sur MARJANE! 🎊🎉\n\n🔥 Profitez de l'offre spéciale Ramadan! Cliquez ici pour tenter votre chance aussi: [VOTRE_LIEN_ICI] 🔥\n\n🚀 Dépêchez-vous, offre limitée!`;
-            
-            const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(shareText)}`;
-            window.open(whatsappUrl, '_blank');
-            
-            alert('✅ Partagez avec 5 contacts et 2 groupes WhatsApp pour recevoir votre prix!');
+        function shareWhatsApp() {
+            const message = `🎉 J'ai gagné ${wonPrize} sur MARJANE! 🎉\n\n🔥 Promotion Spéciale Ramadan - Tentez votre chance aussi!\n\n👉 Lien: VOTRE_LIEN_ICI\n\n⚡ Offre limitée!`;
+            const url = `https://wa.me/?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
         }
 
         function createComments() {
             const comments = [
-                { name: 'Yassine B.', text: 'Waaa machallah gelt mab9ach kayn chi 7aja b7al hadi, chokran Marjane! 🎉', time: 'il y a 2 min' },
-                { name: 'Fatima Z.', text: 'Sara7a kanet 3andi chak f lwel walakin daba weld l7el wselni, chokran bzaf! 😍', time: 'il y a 5 min' },
-                { name: 'Mehdi A.', text: 'Hhhhh ana 3tani Google Play card, 3emrt biha chi 3 games, nadi! 🎮', time: 'il y a 8 min' },
-                { name: 'Salma R.', text: 'W3r had l promo, ana rbe7t 5000dh, kolchi jreb! 💰', time: 'il y a 12 min' },
-                { name: 'Omar T.', text: 'Ch7al hadi w ana kan9leb 3la chi promo mzyana, merci Marjane! 🙏', time: 'il y a 15 min' },
-                { name: 'Khadija M.', text: '3titha l khoya dyali w huwa tani rbe7, hadchi 7a9i9i! 😱', time: 'il y a 20 min' },
-                { name: 'Hamza L.', text: 'iPhone 15 Pro Max!!! Kan 7alem bih mn 3am, chokran chokran! 📱✨', time: 'il y a 25 min' },
-                { name: 'Amina K.', text: 'Madrtch belli ghadi nrbe7, walakin 7ta ana rbe7t! Jrebo ntoma! 💪', time: 'il y a 30 min' },
-                { name: 'Youssef B.', text: 'Sift l sa7abi w kolhom rbe7o, hadchi machi kdub, ch7al mn mara 9olt lhom! 🤩', time: 'il y a 35 min' },
-                { name: 'Nadia E.', text: 'Ana 3tani tour jdid w mn be3d rbe7t, chwiya d sabr w safi! 🎯', time: 'il y a 40 min' },
-                { name: 'Rachid H.', text: 'Wach hadchi 7a9i9i? 3tani 5000dh 3la wed direct! Chokran Marjane! 🏆', time: 'il y a 45 min' },
-                { name: 'Imane S.', text: 'Ba3da 3tani Google Play card, 3emret biha compte dyali, top! 🎮', time: 'il y a 50 min' },
-                { name: 'Karim D.', text: 'Salam, ana mn Casa w 3tani l prize f 3 jours, chokran! 🚚', time: 'il y a 55 min' },
-                { name: 'Sara B.', text: 'Mama kanet 3adza w nta liha 3la wed, rbe7t 3la wedha! 😂💝', time: 'il y a 1h' },
-                { name: 'Hassan M.', text: '7ta ana f lwel ma sde9tch, walakin l 7a9i9a kat3awed! 🎊', time: 'il y a 1h' },
-                { name: 'Zineb A.', text: 'Rbe7t w sift l 5 sa7abi, kolhom 3jabhom l promo! 👏', time: 'il y a 1h' },
-                { name: 'Adil R.', text: 'Merci Marjane 3la had l promo, ntoma l 7a9i9iyin! 💯', time: 'il y a 1h' },
-                { name: 'Meryem T.', text: 'iPhone wsel, wlh 3ad 3jbtni l service, chokran! 📦', time: 'il y a 2h' },
-                { name: 'Soufiane K.', text: 'Jrebt ghir b se7a w rbe7t, hadchi 3la wed kolchi! 🎲', time: 'il y a 2h' },
-                { name: 'Laila N.', text: 'Chokran Marjane, hadi 2 mara nrbe7, kol mara m3a chi promo jdida! 🌟', time: 'il y a 3h' }
+                { name: 'Yassine B.', text: 'Waaa machallah gelt mab9ach kayn chi 7aja bhal hadi, chokran Marjane! 🎉', time: '2 min' },
+                { name: 'Fatima Z.', text: 'Sara7a kanet 3andi chak f lwel walakin daba weld l7el wselni, chokran bzaf! 😍', time: '5 min' },
+                { name: 'Mehdi A.', text: 'Hhhh ana 3tani Google Play card, 3emrt biha chi 3 games, nadi! 🎮', time: '8 min' },
+                { name: 'Salma R.', text: 'W3r had l promo, ana rbe7t 5000dh, kolchi jreb! 💰', time: '12 min' },
+                { name: 'Omar T.', text: 'Ch7al hadi w ana kan9leb 3la chi promo mzyana, merci Marjane! 🙏', time: '15 min' },
+                { name: 'Khadija M.', text: '3titha l khoya dyali w huwa tani rbe7, hadchi 7a9i9i! 😱', time: '20 min' },
+                { name: 'Hamza L.', text: 'iPhone 15 Pro Max!!! Kan 7alem bih mn 3am, chokran chokran! 📱✨', time: '25 min' },
+                { name: 'Amina K.', text: 'Madrtch belli ghadi nrbe7, walakin 7ta ana rbe7t! Jrebo ntoma! 💪', time: '30 min' },
+                { name: 'Youssef B.', text: 'Sift l sa7abi w kolhom rbe7o, hadchi machi kdub! 🤩', time: '35 min' },
+                { name: 'Nadia E.', text: 'Ana 3tani tour jdid w mn be3d rbe7t, chwiya d sabr w safi! 🎯', time: '40 min' },
+                { name: 'Rachid H.', text: 'Wach hadchi 7a9i9i? 3tani 5000dh 3la wed direct! Chokran Marjane! 🏆', time: '45 min' },
+                { name: 'Imane S.', text: 'Ba3da 3tani Google Play card, 3emret biha compte dyali, top! 🎮', time: '50 min' },
+                { name: 'Karim D.', text: 'Salam, ana mn Casa w 3tani l prize f 3 jours, chokran! 🚚', time: '55 min' },
+                { name: 'Sara B.', text: 'Mama kanet 3adza w nta liha 3la wed, rbe7t 3la wedha! 😂💝', time: '1h' },
+                { name: 'Hassan M.', text: '7ta ana f lwel ma sde9tch, walakin l 7a9i9a kat3awed! 🎊', time: '1h' },
+                { name: 'Zineb A.', text: 'Rbe7t w sift l 5 sa7abi, kolhom 3jabhom l promo! 👏', time: '1h' },
+                { name: 'Adil R.', text: 'Merci Marjane 3la had l promo, ntoma l 7a9i9iyin! 💯', time: '1h' },
+                { name: 'Meryem T.', text: 'iPhone wsel, wlh 3ad 3jbtni l service, chokran! 📦', time: '2h' },
+                { name: 'Soufiane K.', text: 'Jrebt ghir b se7a w rbe7t, hadchi 3la wed kolchi! 🎲', time: '2h' },
+                { name: 'Laila N.', text: 'Chokran Marjane, hadi 2 mara nrbe7, kol mara m3a chi promo jdida! 🌟', time: '3h' }
             ];
-            
-            const commentsContainer = document.getElementById('comments');
+
+            const container = document.getElementById('commentsContainer');
             
             comments.forEach(comment => {
-                const commentDiv = document.createElement('div');
-                commentDiv.className = 'comment';
-                commentDiv.innerHTML = `
-                    <div class="name">${comment.name} <span class="verified">✔️ Vérifié</span></div>
-                    <div>${comment.text}</div>
-                    <div class="time">${comment.time}</div>
+                const div = document.createElement('div');
+                div.className = 'comment';
+                div.innerHTML = `
+                    <div class="comment-header">
+                        <span class="comment-name">${comment.name} <span class="verified-badge">✔️</span></span>
+                        <span class="comment-time">il y a ${comment.time}</span>
+                    </div>
+                    <div class="comment-text">${comment.text}</div>
                 `;
-                commentsContainer.appendChild(commentDiv);
+                container.appendChild(div);
             });
         }
 
