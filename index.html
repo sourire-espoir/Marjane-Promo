@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marjane - Promotion Spéciale Ramadan</title>
+    <title>Marjane Mall - Courses en ligne & Promotions</title>
     <style>
         * {
             margin: 0;
@@ -13,58 +13,274 @@
 
         body {
             font-family: Arial, sans-serif;
-            background: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 10px;
+            background: #f5f5f5;
         }
 
-        .container {
-            background: white;
-            border-radius: 15px;
-            max-width: 480px;
-            width: 100%;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
-            overflow: hidden;
-        }
-
-        .header {
+        /* Top Bar */
+        .top-bar {
             background: #e31837;
             color: white;
-            padding: 20px;
-            text-align: center;
+            padding: 8px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
         }
 
-        .header h1 {
-            font-size: 26px;
+        .top-bar span {
+            margin-right: 15px;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e31837;
+            letter-spacing: 2px;
+        }
+
+        .logo span {
+            color: #333;
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 400px;
+            min-width: 200px;
+            margin: 0 15px;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid #e31837;
+            border-radius: 25px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Navigation */
+        .nav {
+            background: #e31837;
+            padding: 0 20px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .nav a {
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+            padding: 12px 15px;
+            font-size: 13px;
             font-weight: bold;
         }
 
-        .header p {
-            margin-top: 5px;
-            font-size: 14px;
+        .nav a:hover {
+            background: #c41430;
         }
 
-        .wheel-section {
-            padding: 25px 20px;
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(135deg, #e31837 0%, #8b0000 100%);
+            color: white;
             text-align: center;
+            padding: 30px 20px;
+        }
+
+        .hero h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Categories */
+        .categories {
+            display: flex;
+            overflow-x: auto;
+            padding: 15px;
+            gap: 10px;
+            background: white;
+        }
+
+        .category {
+            flex: 0 0 80px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            background: #f0f0f0;
+            border-radius: 50%;
+            margin: 0 auto 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .category-name {
+            font-size: 11px;
+            color: #333;
+        }
+
+        /* Products Grid */
+        .products-section {
+            padding: 20px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .product-image {
+            height: 150px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+        }
+
+        .product-info {
+            padding: 10px;
+        }
+
+        .product-name {
+            font-size: 13px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            font-size: 16px;
+            color: #e31837;
+            font-weight: bold;
+        }
+
+        .old-price {
+            font-size: 12px;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 5px;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+        }
+
+        /* Wheel Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 100%;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            animation: slideIn 0.5s;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: #e31837;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            font-size: 20px;
         }
 
         .wheel-container {
             position: relative;
-            width: 280px;
-            height: 280px;
-            margin: 0 auto 25px;
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 20px;
         }
 
         canvas {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            border: 8px solid #333;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 6px solid #333;
         }
 
         .pointer {
@@ -78,155 +294,204 @@
             border-right: 15px solid transparent;
             border-top: 25px solid #e31837;
             z-index: 10;
-            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));
         }
 
         .spin-btn {
             background: #e31837;
             color: white;
             border: none;
-            padding: 14px 40px;
-            font-size: 17px;
+            padding: 12px 35px;
+            font-size: 16px;
             font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 3px 10px rgba(227,24,55,0.3);
         }
 
         .spin-btn:disabled {
             background: #999;
             cursor: not-allowed;
-            box-shadow: none;
         }
 
         .spins-left {
-            margin-top: 12px;
-            font-size: 14px;
+            margin-top: 10px;
+            font-size: 13px;
             color: #666;
-            font-weight: bold;
         }
 
         .result-box {
             display: none;
-            margin: 0 20px 20px;
+            margin-top: 15px;
             padding: 15px;
             background: #fff3cd;
             border: 2px solid #ffc107;
             border-radius: 10px;
-            text-align: center;
-            font-size: 18px;
             font-weight: bold;
-            color: #333;
         }
 
         .share-section {
             display: none;
-            margin: 0 20px 20px;
-            padding: 20px;
+            margin-top: 15px;
+            padding: 15px;
             background: #f8f9fa;
             border: 2px solid #25D366;
             border-radius: 10px;
-            text-align: center;
-        }
-
-        .share-section h3 {
-            color: #e31837;
-            margin-bottom: 10px;
-        }
-
-        .share-section p {
-            margin-bottom: 8px;
-            font-size: 14px;
         }
 
         .share-btn {
             background: #25D366;
             color: white;
             border: none;
-            padding: 12px 25px;
-            font-size: 15px;
+            padding: 10px 25px;
+            font-size: 14px;
             font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
             margin-top: 10px;
         }
 
-        .comments-section {
-            padding: 15px 20px;
-            background: #fafafa;
-            border-top: 1px solid #ddd;
-        }
-
-        .comments-section h3 {
-            text-align: center;
-            margin-bottom: 15px;
-            font-size: 16px;
-            color: #333;
-        }
-
-        .comment {
-            background: white;
-            padding: 12px;
-            margin-bottom: 8px;
-            border-radius: 8px;
-            border: 1px solid #eee;
-            font-size: 13px;
-        }
-
-        .comment-name {
-            font-weight: bold;
-            color: #333;
-            font-size: 13px;
-        }
-
-        .comment-time {
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
             color: #999;
-            font-size: 11px;
-            float: right;
-        }
-
-        .comment-text {
-            color: #555;
-            margin-top: 3px;
-            line-height: 1.4;
-        }
-
-        .verified {
-            color: #25D366;
-            font-size: 11px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>MARJANE</h1>
-            <p>🎉 Promotion Spéciale Ramadan 🎉</p>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div>
+            <span>📍 Magasins</span>
+            <span>📞 0801 000 900</span>
         </div>
+        <div>
+            <span>🇲🇦 Français</span>
+        </div>
+    </div>
 
-        <div class="wheel-section">
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">MARJANE<span>.MA</span></div>
+        <div class="search-bar">
+            <input type="text" placeholder="🔍 Rechercher un produit...">
+        </div>
+        <div class="header-icons">
+            <span>👤</span>
+            <span>🛒</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav">
+        <a href="#">🎁 Promotions</a>
+        <a href="#">🍎 Alimentation</a>
+        <a href="#">📱 Électroménager</a>
+        <a href="#">👕 Mode</a>
+        <a href="#">🏠 Maison</a>
+        <a href="#">💄 Beauté</a>
+        <a href="#">🎮 Loisirs</a>
+        <a href="#">👶 Bébé</a>
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="hero">
+        <h1>🎉 PROMOTION SPÉCIALE RAMADAN 🎉</h1>
+        <p>Des offres incroyables vous attendent!</p>
+    </div>
+
+    <!-- Categories -->
+    <div class="categories">
+        <div class="category">
+            <div class="category-icon">📱</div>
+            <div class="category-name">Téléphones</div>
+        </div>
+        <div class="category">
+            <div class="category-icon">💻</div>
+            <div class="category-name">Informatique</div>
+        </div>
+        <div class="category">
+            <div class="category-icon">📺</div>
+            <div class="category-name">TV & Son</div>
+        </div>
+        <div class="category">
+            <div class="category-icon">🧺</div>
+            <div class="category-name">Électroménager</div>
+        </div>
+        <div class="category">
+            <div class="category-icon">🍎</div>
+            <div class="category-name">Alimentation</div>
+        </div>
+    </div>
+
+    <!-- Products -->
+    <div class="products-section">
+        <div class="section-title">🔥 Offres du moment</div>
+        <div class="products-grid">
+            <div class="product-card" onclick="showWheel()">
+                <div class="product-image">📱</div>
+                <div class="product-info">
+                    <div class="product-name">iPhone 15 Pro Max 256GB</div>
+                    <div class="product-price">14 999 DH <span class="old-price">16 999 DH</span></div>
+                </div>
+            </div>
+            <div class="product-card" onclick="showWheel()">
+                <div class="product-image">📺</div>
+                <div class="product-info">
+                    <div class="product-name">Smart TV Samsung 55" 4K</div>
+                    <div class="product-price">5 999 DH <span class="old-price">7 499 DH</span></div>
+                </div>
+            </div>
+            <div class="product-card" onclick="showWheel()">
+                <div class="product-image">💻</div>
+                <div class="product-info">
+                    <div class="product-name">PC Portable HP i7 16GB</div>
+                    <div class="product-price">7 999 DH <span class="old-price">9 999 DH</span></div>
+                </div>
+            </div>
+            <div class="product-card" onclick="showWheel()">
+                <div class="product-image">🎧</div>
+                <div class="product-info">
+                    <div class="product-name">AirPods Pro 2</div>
+                    <div class="product-price">2 499 DH <span class="old-price">2 999 DH</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2024 Marjane Mall - Tous droits réservés</p>
+        <p style="margin-top: 5px;">Conditions générales | Politique de confidentialité</p>
+    </div>
+
+    <!-- Wheel Modal -->
+    <div class="modal-overlay" id="wheelModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeWheel()">✕</span>
+            
+            <div class="modal-header">
+                <h2>🎉 FÉLICITATIONS! 🎉</h2>
+                <p style="font-size: 14px; margin-top: 5px;">Vous avez gagné un tour gratuit!</p>
+            </div>
+
             <div class="wheel-container">
                 <div class="pointer"></div>
-                <canvas id="wheelCanvas" width="560" height="560"></canvas>
+                <canvas id="wheelCanvas" width="500" height="500"></canvas>
             </div>
-            
+
             <button class="spin-btn" id="spinBtn" onclick="spin()">🎰 TOURNER LA ROUE</button>
             <div class="spins-left" id="spinsLeft">Tours restants: 3</div>
-        </div>
 
-        <div class="result-box" id="resultBox"></div>
+            <div class="result-box" id="resultBox"></div>
 
-        <div class="share-section" id="shareSection">
-            <h3>🎊 Félicitations! 🎊</h3>
-            <p>Pour recevoir votre prix, partagez avec:</p>
-            <p>📱 <strong>5 contacts WhatsApp</strong></p>
-            <p>👥 <strong>2 groupes WhatsApp</strong></p>
-            <button class="share-btn" onclick="shareWhatsApp()">📤 Partager sur WhatsApp</button>
-        </div>
-
-        <div class="comments-section">
-            <h3>💬 Gagnants Récents</h3>
-            <div id="commentsContainer"></div>
+            <div class="share-section" id="shareSection">
+                <h3>🎊 Pour recevoir votre prix:</h3>
+                <p style="margin: 10px 0;">📱 Partagez avec <strong>5 contacts</strong></p>
+                <p style="margin-bottom: 10px;">👥 Et <strong>2 groupes WhatsApp</strong></p>
+                <button class="share-btn" onclick="shareWhatsApp()">📤 Partager sur WhatsApp</button>
+            </div>
         </div>
     </div>
 
@@ -250,6 +515,14 @@
         const canvas = document.getElementById('wheelCanvas');
         const ctx = canvas.getContext('2d');
 
+        function showWheel() {
+            document.getElementById('wheelModal').style.display = 'flex';
+        }
+
+        function closeWheel() {
+            document.getElementById('wheelModal').style.display = 'none';
+        }
+
         function drawWheel(rotation) {
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
@@ -263,7 +536,6 @@
                 const startAngle = index * anglePerSegment + rotation;
                 const endAngle = startAngle + anglePerSegment;
                 
-                // Draw segment
                 ctx.beginPath();
                 ctx.moveTo(centerX, centerY);
                 ctx.arc(centerX, centerY, radius, startAngle, endAngle);
@@ -274,53 +546,40 @@
                 ctx.lineWidth = 2;
                 ctx.stroke();
                 
-                // Draw text
                 ctx.save();
                 ctx.translate(centerX, centerY);
                 ctx.rotate(startAngle + anglePerSegment / 2);
                 ctx.textAlign = 'center';
                 ctx.fillStyle = 'white';
-                ctx.font = 'bold 16px Arial';
-                ctx.fillText(prize.text, radius * 0.6, 6);
+                ctx.font = 'bold 14px Arial';
+                ctx.fillText(prize.text, radius * 0.6, 5);
                 ctx.restore();
             });
             
-            // Center circle
             ctx.beginPath();
-            ctx.arc(centerX, centerY, 30, 0, 2 * Math.PI);
+            ctx.arc(centerX, centerY, 25, 0, 2 * Math.PI);
             ctx.fillStyle = 'white';
             ctx.fill();
             ctx.strokeStyle = '#333';
-            ctx.lineWidth = 3;
+            ctx.lineWidth = 2;
             ctx.stroke();
         }
 
         function getWinningIndex(rotation) {
             const segments = prizes.length;
             const anglePerSegment = (2 * Math.PI) / segments;
-            
-            // Pointer is at top (270 degrees or -90 degrees in standard position)
-            const pointerAngle = (3 * Math.PI) / 2; // 270 degrees
-            
-            // Normalize rotation
+            const pointerAngle = (3 * Math.PI) / 2;
             const normalizedRotation = ((rotation % (2 * Math.PI)) + (2 * Math.PI)) % (2 * Math.PI);
             
-            // Find which segment is under the pointer
             for (let i = 0; i < segments; i++) {
                 const segmentStart = i * anglePerSegment;
                 const segmentEnd = (i + 1) * anglePerSegment;
-                
-                // Check if pointer angle falls in this segment
-                let checkAngle = pointerAngle;
-                
-                // Adjust for rotation
-                let adjustedAngle = (checkAngle - normalizedRotation + (2 * Math.PI)) % (2 * Math.PI);
+                const adjustedAngle = (pointerAngle - normalizedRotation + (2 * Math.PI)) % (2 * Math.PI);
                 
                 if (adjustedAngle >= segmentStart && adjustedAngle < segmentEnd) {
                     return i;
                 }
             }
-            
             return 0;
         }
 
@@ -337,7 +596,6 @@
             resultBox.style.display = 'none';
             document.getElementById('shareSection').style.display = 'none';
 
-            // First, randomly choose the winning prize
             let winningIndex;
             
             if (firstSpin) {
@@ -348,18 +606,11 @@
                 winningIndex = Math.floor(Math.random() * prizes.length);
             }
 
-            // Calculate exact angle to land on winning segment
             const segments = prizes.length;
             const anglePerSegment = (2 * Math.PI) / segments;
-            
-            // Pointer is at top (270 degrees)
             const pointerAngle = (3 * Math.PI) / 2;
-            
-            // Calculate target rotation so winning segment is at pointer
             const targetSegmentCenter = winningIndex * anglePerSegment + anglePerSegment / 2;
             const targetRotation = (pointerAngle - targetSegmentCenter + (2 * Math.PI)) % (2 * Math.PI);
-            
-            // Add full spins (5 complete rotations)
             const fullSpins = 5 * (2 * Math.PI);
             const totalRotation = fullSpins + targetRotation;
             
@@ -370,8 +621,6 @@
             function animate(now) {
                 const elapsed = now - startTime;
                 const progress = Math.min(elapsed / duration, 1);
-                
-                // Easing function for smooth deceleration
                 const eased = 1 - Math.pow(1 - progress, 3);
                 const angle = startAngle + (totalRotation * eased);
                 
@@ -381,11 +630,8 @@
                     requestAnimationFrame(animate);
                 } else {
                     currentAngle = angle % (2 * Math.PI);
-                    
-                    // Verify winning index
                     const verifiedIndex = getWinningIndex(currentAngle);
                     const prize = prizes[verifiedIndex];
-                    
                     wonPrize = prize.text;
                     
                     spinsLeft--;
@@ -418,49 +664,13 @@
             window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
         }
 
-        function createComments() {
-            const comments = [
-                { name: 'Yassine B.', text: 'Waaa machallah gelt mab9ach kayn chi 7aja bhal hadi, chokran Marjane! 🎉', time: '2 min' },
-                { name: 'Fatima Z.', text: 'Sara7a kanet 3andi chak f lwel walakin daba weld l7el wselni, chokran bzaf! 😍', time: '5 min' },
-                { name: 'Mehdi A.', text: 'Hhhh ana 3tani Google Play card, 3emrt biha chi 3 games, nadi! 🎮', time: '8 min' },
-                { name: 'Salma R.', text: 'W3r had l promo, ana rbe7t 5000dh, kolchi jreb! 💰', time: '12 min' },
-                { name: 'Omar T.', text: 'Ch7al hadi w ana kan9leb 3la chi promo mzyana, merci Marjane! 🙏', time: '15 min' },
-                { name: 'Khadija M.', text: '3titha l khoya dyali w huwa tani rbe7, hadchi 7a9i9i! 😱', time: '20 min' },
-                { name: 'Hamza L.', text: 'iPhone 15 Pro Max!!! Kan 7alem bih mn 3am, chokran chokran! 📱✨', time: '25 min' },
-                { name: 'Amina K.', text: 'Madrtch belli ghadi nrbe7, walakin 7ta ana rbe7t! Jrebo ntoma! 💪', time: '30 min' },
-                { name: 'Youssef B.', text: 'Sift l sa7abi w kolhom rbe7o, hadchi machi kdub! 🤩', time: '35 min' },
-                { name: 'Nadia E.', text: 'Ana 3tani tour jdid w mn be3d rbe7t, chwiya d sabr w safi! 🎯', time: '40 min' },
-                { name: 'Rachid H.', text: 'Wach hadchi 7a9i9i? 3tani 5000dh 3la wed direct! Chokran Marjane! 🏆', time: '45 min' },
-                { name: 'Imane S.', text: 'Ba3da 3tani Google Play card, 3emret biha compte dyali, top! 🎮', time: '50 min' },
-                { name: 'Karim D.', text: 'Salam, ana mn Casa w 3tani l prize f 3 jours, chokran! 🚚', time: '55 min' },
-                { name: 'Sara B.', text: 'Mama kanet 3adza w nta liha 3la wed, rbe7t 3la wedha! 😂💝', time: '1h' },
-                { name: 'Hassan M.', text: '7ta ana f lwel ma sde9tch, walakin l 7a9i9a kat3awed! 🎊', time: '1h' },
-                { name: 'Zineb A.', text: 'Rbe7t w sift l 5 sa7abi, kolhom 3jabhom l promo! 👏', time: '1h' },
-                { name: 'Adil R.', text: 'Merci Marjane 3la had l promo, ntoma l 7a9i9iyin! 💯', time: '1h' },
-                { name: 'Meryem T.', text: 'iPhone wsel, wlh 3ad 3jbtni l service, chokran! 📦', time: '2h' },
-                { name: 'Soufiane K.', text: 'Jrebt ghir b se7a w rbe7t, hadchi 3la wed kolchi! 🎲', time: '2h' },
-                { name: 'Laila N.', text: 'Chokran Marjane, hadi 2 mara nrbe7, kol mara m3a chi promo jdida! 🌟', time: '3h' }
-            ];
-
-            const container = document.getElementById('commentsContainer');
-            
-            comments.forEach(comment => {
-                const div = document.createElement('div');
-                div.className = 'comment';
-                div.innerHTML = `
-                    <div>
-                        <span class="comment-name">${comment.name} <span class="verified">✔️</span></span>
-                        <span class="comment-time">il y a ${comment.time}</span>
-                    </div>
-                    <div class="comment-text">${comment.text}</div>
-                `;
-                container.appendChild(div);
-            });
-        }
+        // Auto-show wheel after 5 seconds
+        setTimeout(() => {
+            showWheel();
+        }, 5000);
 
         // Initialize
         drawWheel(0);
-        createComments();
     </script>
 </body>
 </html>
