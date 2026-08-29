@@ -404,17 +404,20 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            overflow-y: auto;
         }
 
         .modal-content {
             background: white;
             border-radius: 20px;
-            max-width: 420px;
+            max-width: 450px;
             width: 100%;
             padding: 30px;
             text-align: center;
             position: relative;
             animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         @keyframes popIn {
@@ -539,32 +542,116 @@
             color: #333;
         }
 
+        /* Share Section - Enhanced */
         .share-section {
             display: none;
             margin-top: 20px;
-            padding: 20px;
-            background: #f0fff4;
-            border: 2px solid #25D366;
+            padding: 25px;
+            background: linear-gradient(135deg, #f0fff4 0%, #e8f5e9 100%);
+            border: 3px solid #25D366;
             border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(37,211,102,0.3);
         }
 
         .share-section h3 {
             color: #e31837;
             margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .share-instructions {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .share-requirement {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .share-requirement .icon {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        .share-requirement .status {
+            color: #25D366;
             font-size: 20px;
         }
 
+        .share-requirement .status.pending {
+            color: #ffc107;
+        }
+
+        .progress-bar-container {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 20px;
+            margin: 15px 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, #25D366 0%, #128C7E 100%);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+
+        .progress-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            font-size: 12px;
+            color: #333;
+        }
+
         .share-btn {
-            background: #25D366;
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
             color: white;
             border: none;
-            padding: 12px 30px;
-            font-size: 16px;
+            padding: 15px 40px;
+            font-size: 18px;
             font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
             margin-top: 15px;
             box-shadow: 0 5px 15px rgba(37,211,102,0.4);
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37,211,102,0.5);
+        }
+
+        .share-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .share-count {
+            font-size: 14px;
+            color: #666;
+            margin-top: 10px;
+            font-weight: bold;
         }
 
         .close-modal {
@@ -575,6 +662,7 @@
             cursor: pointer;
             color: #999;
             transition: color 0.3s;
+            z-index: 10;
         }
 
         .close-modal:hover {
@@ -863,10 +951,30 @@
             <div class="result-box" id="resultBox"></div>
 
             <div class="share-section" id="shareSection">
-                <h3>🎊 Pour recevoir votre prix:</h3>
-                <p style="margin: 10px 0;">📱 Partagez avec <strong>5 contacts</strong></p>
-                <p style="margin-bottom: 10px;">👥 Et <strong>2 groupes WhatsApp</strong></p>
-                <button class="share-btn" onclick="shareWhatsApp()">📤 Partager sur WhatsApp</button>
+                <h3>🎊 Félicitations! 🎊</h3>
+                <p style="font-size: 18px; margin-bottom: 15px;">Vous avez gagné: <strong id="prizeText"></strong></p>
+                
+                <div class="share-instructions">
+                    <p style="font-size: 16px; font-weight: bold; margin-bottom: 15px;">📤 Pour recevoir votre prix, partagez avec:</p>
+                    
+                    <div class="share-requirement">
+                        <span><span class="icon">📱</span> 5 Contacts WhatsApp</span>
+                        <span class="status pending" id="contactsStatus">0 / 5</span>
+                    </div>
+                    
+                    <div class="share-requirement">
+                        <span><span class="icon">👥</span> 2 Groupes WhatsApp</span>
+                        <span class="status pending" id="groupsStatus">0 / 2</span>
+                    </div>
+                </div>
+
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progressBar"></div>
+                    <div class="progress-text" id="progressText">0% Complété</div>
+                </div>
+
+                <button class="share-btn" id="shareBtn" onclick="shareWhatsApp()">📤 Partager sur WhatsApp</button>
+                <div class="share-count" id="shareCount">Partages effectués: 0 / 7</div>
             </div>
         </div>
     </div>
@@ -887,6 +995,9 @@
         let currentAngle = 0;
         let wonPrize = '';
         let firstSpin = true;
+        let shareProgress = 0;
+        let contactsShared = 0;
+        let groupsShared = 0;
 
         const canvas = document.getElementById('wheelCanvas');
         const ctx = canvas.getContext('2d');
@@ -1033,6 +1144,7 @@
                     } else {
                         resultBox.textContent = `🎉 Félicitations! Vous avez gagné: ${wonPrize}! 🎉`;
                         resultBox.style.display = 'block';
+                        document.getElementById('prizeText').textContent = wonPrize;
                         document.getElementById('shareSection').style.display = 'block';
                         button.disabled = true;
                     }
@@ -1045,6 +1157,45 @@
         function shareWhatsApp() {
             const message = `🎉 J'ai gagné ${wonPrize} sur MARJANE! 🎉\n\n🔥 Promotion Spéciale Ramadan - Tentez votre chance!\n\n⚡ Offre limitée!`;
             window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+            
+            // Simulate sharing progress
+            updateShareProgress();
+        }
+
+        function updateShareProgress() {
+            shareProgress++;
+            
+            if (shareProgress <= 5) {
+                contactsShared = shareProgress;
+                document.getElementById('contactsStatus').textContent = `${contactsShared} / 5`;
+                if (contactsShared >= 5) {
+                    document.getElementById('contactsStatus').textContent = '✅ 5 / 5';
+                    document.getElementById('contactsStatus').className = 'status';
+                }
+            } else if (shareProgress <= 7) {
+                groupsShared = shareProgress - 5;
+                document.getElementById('groupsStatus').textContent = `${groupsShared} / 2`;
+                if (groupsShared >= 2) {
+                    document.getElementById('groupsStatus').textContent = '✅ 2 / 2';
+                    document.getElementById('groupsStatus').className = 'status';
+                }
+            }
+            
+            // Update progress bar
+            const progressPercent = Math.min((shareProgress / 7) * 100, 100);
+            document.getElementById('progressBar').style.width = `${progressPercent}%`;
+            document.getElementById('progressText').textContent = `${Math.round(progressPercent)}% Complété`;
+            document.getElementById('shareCount').textContent = `Partages effectués: ${shareProgress} / 7`;
+            
+            // Check if complete
+            if (shareProgress >= 7) {
+                document.getElementById('shareBtn').disabled = true;
+                document.getElementById('shareBtn').textContent = '✅ Prix Débloqué!';
+                document.getElementById('shareCount').textContent = '🎉 Félicitations! Tous les partages sont complétés!';
+                setTimeout(() => {
+                    alert('🎉 Félicitations! Votre prix est prêt à être livré!');
+                }, 1000);
+            }
         }
 
         // Auto-show wheel after 5 seconds
